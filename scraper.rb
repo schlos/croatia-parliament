@@ -46,7 +46,7 @@ def scrape_mp(sortname, url)
     constituency: noko.xpath('//td[b[contains(.,"Constituency:")]]/text()').text,
     start_date: noko.xpath('//td[b[contains(.,"Begin of parliamentary mandate:")]]/text()').text.split('/').reverse.join('-'),
     # TODO: Chamges, e.g. http://www.sabor.hr/Default.aspx?sec=5358
-    term: 7,
+    term: 6,
     source: url.to_s,
   }
   data[:image] = URI.join(url, data[:image]).to_s unless data[:image].to_s.empty?
@@ -58,4 +58,4 @@ def scrape_mp(sortname, url)
   ScraperWiki.save_sqlite([:id, :term], data)
 end
 
-scrape_list('http://www.sabor.hr/Default.aspx?sec=4891')
+scrape_list('http://www.sabor.hr/Default.aspx?sec=4897')
