@@ -22,7 +22,7 @@ def dob_from(node)
   Date.parse(node.text.tidy[/(?:Rođen|Rođena)\s+(?:je)\s+(\d+.*\s+\w+\s+\d+.)/, 1]).to_s rescue ''
 end
 
-def scrape_list(url)
+def scrape_url(url)
   noko = noko_for(url)
   noko.css('.liste2 .liste a').each do |a|
     link = URI.join url, a.attr('href')
@@ -58,4 +58,8 @@ def scrape_mp(sortname, url)
   ScraperWiki.save_sqlite([:id, :term], data)
 end
 
-scrape_list('http://www.sabor.hr/Default.aspx?sec=18')
+scrape_list[
+  ['http://www.sabor.hr/Default.aspx?sec=18'],
+  ['http://www.sabor.hr/Default.aspx?sec=1237']
+  ]
+scrape_list.each do |scrape_url|
