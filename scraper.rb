@@ -22,7 +22,7 @@ def dob_from(node)
   Date.parse(node.text.tidy[/(?:Rođen|Rođena)\s+(?:je)\s+(\d+.*\s+\w+\s+\d+.)/, 1]).to_s rescue ''
 end
 
-def scrape_url(url)
+def scrape_list(url)
   noko = noko_for(url)
   noko.css('.liste2 .liste a').each do |a|
     link = URI.join url, a.attr('href')
