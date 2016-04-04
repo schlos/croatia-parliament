@@ -58,8 +58,4 @@ def scrape_mp(sortname, url)
   ScraperWiki.save_sqlite([:id, :term], data)
 end
 
-scrape_list[
-  ['http://www.sabor.hr/Default.aspx?sec=18'],
-  ['http://www.sabor.hr/Default.aspx?sec=1237']
-  ]
-scrape_list.each do |scrape_url|
+scrape_list('http://www.sabor.hr/Default.aspx?sec=18')
