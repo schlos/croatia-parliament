@@ -19,7 +19,7 @@ def noko_for(url)
 end
 
 def dob_from(node)
-  Date.parse(node.text.tidy[(?:Rođen|Rođena)\s+(?:je)\s+(\d+.*\s+\w+\s+\d+.)/, 1]).to_s rescue ''
+  Date.parse(node.text.tidy[/(?:Rođen|Rođena)\s+(?:je)\s+(\d+.*\s+\w+\s+\d+.)/, 1]).to_s rescue ''
 end
 
 def scrape_list(url)
