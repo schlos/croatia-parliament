@@ -46,7 +46,7 @@ def scrape_mp(sortname, url)
     constituency: noko.xpath('//td[b[contains(.,"Izborna jedinica:")]]/text()').text,
     start_date: noko.xpath('//td[b[contains(.,"Početak obnašanja zastupničkog mandata:")]]/text()').text.split('/').reverse.join('-'),
     # TODO: Chamges, e.g. http://www.sabor.hr/Default.aspx?sec=5358
-    term: (text.tidy[/(?:Arhiva|Zastupnici)\s+(\d)+(?:.*\s+saziva+\s+Hrvatskoga+\s+sabora)/, 1]).to_s
+    term: (text.tidy[/(?:Arhiva|Zastupnici)\s+(\d)+(?:.*\s+saziva+\s+Hrvatskoga+\s+sabora)/, 1]).to_s,
     source: url.to_s,
   }
   data[:image] = URI.join(url, data[:image]).to_s unless data[:image].to_s.empty?
