@@ -22,7 +22,7 @@ def dob_from(node)
   Date.parse(node.text.tidy[/(?:Rođen|Rođena)\s+(?:je)\s+(\d+.*\s+\w+\s+\d+.)/, 1]).to_s rescue ''
 end
 
-def scrape_list(url)
+def scrape_list(url, term)
   noko = noko_for(url)
   noko.css('.liste2 .liste a').each do |a|
     link = URI.join url, a.attr('href')
@@ -30,7 +30,7 @@ def scrape_list(url)
   end
 end
 
-def scrape_mp(sortname, url)
+def scrape_mp(sortname, url, term)
   puts url.to_s
   noko = noko_for(url)
 
@@ -46,7 +46,7 @@ def scrape_mp(sortname, url)
     constituency: noko.xpath('//td[b[contains(.,"Izborna jedinica:")]]/text()').text,
     start_date: noko.xpath('//td[b[contains(.,"Početak obnašanja zastupničkog mandata:")]]/text()').text.split('/').reverse.join('-'),
     # TODO: Chamges, e.g. http://www.sabor.hr/Default.aspx?sec=5358
-    term: 5,
+    term: term,
     source: url.to_s,
   }
   data[:image] = URI.join(url, data[:image]).to_s unless data[:image].to_s.empty?
@@ -58,4 +58,11 @@ def scrape_mp(sortname, url)
   ScraperWiki.save_sqlite([:id, :term], data)
 end
 
-scrape_list('http://www.sabor.hr/Default.aspx?sec=18')
+terms = { 
+  '4' => 'http://www.sabor.hr/Default.aspx?sec=1237',
+  '5' => 'http://www.sabor.hr/Default.aspx?sec=18',
+}
+
+terms.each do |term, url|
+  scrape_list(url, term)
+end
