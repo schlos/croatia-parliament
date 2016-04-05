@@ -30,7 +30,7 @@ def scrape_list(url, term)
   end
 end
 
-def scrape_mp(sortname, url, term)
+def scrape_mp(sortname, url)
   puts url.to_s
   noko = noko_for(url)
 
