@@ -26,11 +26,11 @@ def scrape_list(url, term)
   noko = noko_for(url)
   noko.css('.liste2 .liste a').each do |a|
     link = URI.join url, a.attr('href')
-    scrape_mp(a.text, link)
+    scrape_mp(a.text, link, term)
   end
 end
 
-def scrape_mp(sortname, url)
+def scrape_mp(sortname, url, term)
   puts url.to_s
   noko = noko_for(url)
 
